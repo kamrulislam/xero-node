@@ -9,7 +9,6 @@
     "build-docs": "typedoc --options ./typedoc.js ./src",
     "lint": "tslint ./src/**/*.ts",
     "prepare": "npm run build",
-    "prepublishOnly": "npm run build",
     "test-watch": "tsc --noEmit && jest --config ./jestconfig.js --watch",
     "test": "tsc --noEmit && jest --config ./jestconfig.js",
     "test-auth": "tsc --noEmit && jest ./src/__integration_tests__/partner-example.tests.ts --config ./jestconfig.js",
