@@ -26,6 +26,9 @@ export interface LeaveApplication {
 	EmployeeID: string;
 	LeaveTypeID: string;
 	LeavePeriods: LeavePeriod[];
+	StartDate: string;
+	EndDate: string;
+	UpdatedDateUTC: string;
 }
 
 export interface LeaveApplicationsResponse {
