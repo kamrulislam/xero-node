@@ -1,7 +1,7 @@
 import * as fs from 'fs';
 import { BaseAPIClient, XeroClientConfiguration } from './internals/BaseAPIClient';
 import { AccessToken, IOAuth1HttpClient } from './internals/OAuth1HttpClient';
-import { AttachmentsEndpoint, HeaderArgs, QueryArgs } from './AccountingAPIClient';
+import { AttachmentsEndpoint, HeaderArgs, QueryArgs, PagingArgs } from './AccountingAPIClient';
 import { AttachmentsResponse, EmployeesResponse } from './AccountingAPI-responses';
 import { escapeString, generateQueryString } from './internals/utils';
 import { LeaveApplicationsResponse } from './PayrollAPI-responses';
@@ -82,12 +82,12 @@ export class PayrollAPIClient extends BaseAPIClient {
 	};
 
 	public leaveApplications = {
-		get: async (args?: { AccountID?: string } & QueryArgs & HeaderArgs): Promise<LeaveApplicationsResponse> => {
+		get: async (args?: { StartDate?: string } & PagingArgs & QueryArgs & HeaderArgs): Promise<LeaveApplicationsResponse> => {
 			let endpoint = 'LeaveApplications';
-			if (args && args.AccountID) {
-				endpoint = endpoint + '/' + args.AccountID;
-				delete args.AccountID; // remove from query string
-			}
+			// if (args && args.AccountID) {
+			// 	endpoint = endpoint + '/' + args.AccountID;
+			// 	delete args.AccountID; // remove from query string
+			// }
 			const header = this.generateHeader(args);
 			endpoint += generateQueryString(args);
 
