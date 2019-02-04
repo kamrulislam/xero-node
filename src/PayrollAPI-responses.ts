@@ -34,3 +34,31 @@ export interface LeaveApplication {
 export interface LeaveApplicationsResponse {
 	LeaveApplications: LeaveApplication[];
 }
+
+export interface EarningsRate{
+	Name: string;
+}
+
+export interface DeductionType{
+	Name: string;
+}
+
+export interface LeaveType{
+	Name: string;
+	LeaveTypeID: string;
+}
+
+export interface ReimbursementType {
+	Name: string;
+}
+
+export interface PayItems {
+	EarningsRates: EarningsRate[];
+	DeductionTypes: DeductionType[];
+	LeaveTypes: LeaveType[];
+	ReimbursementTypes: ReimbursementType[];
+}
+
+export interface PayItemsResponse{
+	PayItems: PayItems;
+}

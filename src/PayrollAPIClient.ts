@@ -4,7 +4,7 @@ import { AccessToken, IOAuth1HttpClient } from './internals/OAuth1HttpClient';
 import { AttachmentsEndpoint, HeaderArgs, QueryArgs, PagingArgs } from './AccountingAPIClient';
 import { AttachmentsResponse, EmployeesResponse } from './AccountingAPI-responses';
 import { escapeString, generateQueryString } from './internals/utils';
-import { LeaveApplicationsResponse } from './PayrollAPI-responses';
+import { LeaveApplicationsResponse, PayItemsResponse } from './PayrollAPI-responses';
 
 export class PayrollAPIClient extends BaseAPIClient {
 	public constructor(options: XeroClientConfiguration, authState?: AccessToken, _oAuth1HttpClient?: IOAuth1HttpClient) {
@@ -115,5 +115,19 @@ export class PayrollAPIClient extends BaseAPIClient {
 			return this.oauth1Client.delete<LeaveApplicationsResponse>(endpoint);
 		},
 		attachments: this.generateAttachmentsEndpoint('LeaveApplications')
+	};
+
+	public payItems = {
+		get: async (args?: HeaderArgs): Promise<PayItemsResponse> => {
+			let endpoint = 'PayItems';
+			// if (args && args.AccountID) {
+			// 	endpoint = endpoint + '/' + args.AccountID;
+			// 	delete args.AccountID; // remove from query string
+			// }
+			const header = this.generateHeader(args);
+			endpoint += generateQueryString(args);
+
+			return this.oauth1Client.get<PayItemsResponse>(endpoint, header);
+		}
 	};
 }
